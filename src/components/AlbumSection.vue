@@ -2,7 +2,7 @@
   <div>
     <div v-for="album in albums" :key="album.title">
       <AlbumCard
-        ::title="album.title"
+        :title="album.title"
         :image="album.poster"
         :author="album.author"
         :year="album.year"
