@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <div v-for="album in albums" :key="album.title">
+  <div class="container">
+    <div class="album-section">
       <AlbumCard
+        v-for="album in albums"
+        :key="album.title"
         :title="album.title"
         :image="album.poster"
         :author="album.author"
@@ -39,5 +41,15 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.album-section {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
 </style>
