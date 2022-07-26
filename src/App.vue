@@ -1,35 +1,22 @@
 <template>
   <div id="app">
     <AppHeader />
+    <AlbumSection />
   </div>
 </template>
 
 <script>
 import AppHeader from "./components/AppHeader.vue";
-import axios from "axios";
+import AlbumSection from "./components/AlbumSection.vue";
+
 export default {
   name: "App",
   data() {
-    return {
-      albums: [],
-    };
+    return {};
   },
   components: {
     AppHeader,
-  },
-  methods: {
-    getAlbums() {
-      axios
-        .get("https://flynn.boolean.careers/exercises/api/array/music")
-        .then((res) => {
-          console.log(res.data);
-          this.albums = res.data.response;
-        });
-    },
-  },
-
-  mounted() {
-    this.getAlbums();
+    AlbumSection,
   },
 };
 </script>
