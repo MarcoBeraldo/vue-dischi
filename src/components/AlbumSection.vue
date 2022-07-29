@@ -2,7 +2,7 @@
   <div class="container">
     <div class="album-section">
       <AlbumCard
-        v-for="album in albums"
+        v-for="album in filteredAlbums"
         :key="album.title"
         :title="album.title"
         :image="album.poster"
@@ -26,13 +26,31 @@ export default {
   components: {
     AlbumCard,
   },
+  props: {
+    selectedGenre: String,
+  },
+  computed: {
+    filteredAlbums() {
+      if (!this.selectedGenre) return this.albums;
+      return this.albums.filter((album) => album.genre === this.selectedGenre);
+    },
+  },
   methods: {
     getAlbums() {
       axios
         .get("https://flynn.boolean.careers/exercises/api/array/music")
         .then((res) => {
           this.albums = res.data.response;
+          this.getGenresList();
         });
+    },
+    getGenresList() {
+      const genres = [];
+
+      this.albums.forEach((album) => {
+        if (!genres.includes(album.genre)) genres.push(album.genre);
+      });
+      this.$emit("fetched-genres", genres);
     },
   },
   mounted() {

@@ -1,7 +1,10 @@
 <template>
   <div id="app">
-    <AppHeader />
-    <AlbumSection />
+    <AppHeader :genres-list="genresList" @genre-change="setSelectedGenre" />
+    <AlbumSection
+      :selected-genre="selectedGenre"
+      @fetched-genres="setGenresList"
+    />
   </div>
 </template>
 
@@ -12,11 +15,22 @@ import AlbumSection from "./components/AlbumSection.vue";
 export default {
   name: "App",
   data() {
-    return {};
+    return {
+      selectedGenre: "",
+      genresList: ["Rock", "Metal", "Pop"],
+    };
   },
   components: {
     AppHeader,
     AlbumSection,
+  },
+  methods: {
+    setSelectedGenre(genre) {
+      this.selectedGenre = genre;
+    },
+    setGenresList(genres) {
+      this.genresList = genres;
+    },
   },
 };
 </script>
